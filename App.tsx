@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Layout } from './components/Layout';
 import { PostList } from './components/PostList';
 import { PostDetail } from './components/PostDetail';
