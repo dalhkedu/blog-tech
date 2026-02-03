@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Tema Caramelo (Light Mode) */
+  --color-background: #fffbf2;
+  --color-surface: #ffffff;
+  --color-primary: #d97706;
+  --color-text: #292524;
+  --color-muted: #78716c;
+}
+
+.dark {
+  /* Tema Dracula (Dark Mode) */
+  --color-background: #282a36;
+  --color-surface: #44475a;
+  --color-primary: #ffb86c;
+  --color-text: #f8f8f2;
+  --color-muted: #6272a4;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
