@@ -4,7 +4,10 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // IMPORTANTE: Se o seu repositório for 'blog-caramelo', mude para '/blog-caramelo/'
-  // Se for o repositório principal (seu-usuario.github.io), mude para '/'
-  base: './', 
+  // Usar base vazia ou './' garante que o site funcione tanto em domínios próprios quanto em subpastas do GitHub Pages
+  base: './',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+  }
 })
