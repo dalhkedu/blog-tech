@@ -1,119 +1,195 @@
-﻿--- --- @import "minima";
+﻿---
+---
+@import "minima";
 
-// Modern Design Tokens
+// Advanced Design Tokens & Variables
 :root {
   --bg-color: #ffffff;
-  --surface-color: #f8f9fa;
-  --text-primary: #1a1a1a;
-  --text-secondary: #4a4a4a;
-  --accent-color: #e67e22; // Caramelo
-  --border-color: #eeeeee;
+  --surface-color: #fcfcfc;
+  --text-primary: #121212;
+  --text-secondary: #5f6368;
+  --accent-color: #e67e22; // Core Caramelo
+  --accent-hover: #d35400;
+  --border-color: #f1f1f1;
+  --selection-bg: rgba(230, 126, 34, 0.2);
   --header-font: 'Outfit', sans-serif;
   --body-font: 'Inter', sans-serif;
-  --code-bg: #f4f4f4;
+  --code-bg: #f8f9fa;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --transition-speed: 0.3s;
 }
 
 [data-theme="dark"] {
-  --bg-color: #121212;
-  --surface-color: #1e1e1e;
-  --text-primary: #e0e0e0;
-  --text-secondary: #aaaaaa;
-  --accent-color: #ffb86c; // Dracula Orange/Caramelo-ish
-  --border-color: #333333;
-  --code-bg: #2d2d2d;
+  --bg-color: #0f111a;
+  --surface-color: #1a1c27;
+  --text-primary: #f0f0f0;
+  --text-secondary: #9499b3;
+  --accent-color: #ffb86c; // Saturated Caramelo for Dark
+  --accent-hover: #ffcf96;
+  --border-color: #24283b;
+  --selection-bg: rgba(255, 184, 108, 0.3);
+  --code-bg: #1e2030;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+// Global Reset & Base Styles
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
   font-family: var(--body-font);
-  transition: background-color 0.3s, color 0.3s;
-  line-height: 1.7;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  line-height: 1.8;
   margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+::selection {
+  background-color: var(--selection-bg);
+}
+
+.wrapper {
+  max-width: 900px;
+  padding: 0 2rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--header-font);
   color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 a {
   color: var(--accent-color);
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: all 0.2s ease;
 }
 
 a:hover {
-  opacity: 0.8;
-  text-decoration: underline;
+  color: var(--accent-hover);
 }
 
+// Layout Components
 .site-header {
   background-color: var(--bg-color);
   border-bottom: 1px solid var(--border-color);
-  border-top: 4px solid var(--accent-color);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: none;
 }
 
-.site-title,
-.site-nav .page-link {
+.site-title {
+  font-family: var(--header-font);
+  font-weight: 800;
+  font-size: 1.4rem;
   color: var(--text-primary) !important;
+  letter-spacing: -0.03em;
 }
 
-.post-title {
-  color: var(--text-primary);
+.site-nav .page-link {
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  margin-left: 1.5rem;
 }
 
-.post-meta {
-  color: var(--text-secondary);
+.site-nav .page-link:hover {
+  color: var(--accent-color) !important;
 }
 
-.wrapper {
-  max-width: 850px;
-}
-
+// Premium Theme Toggle
 .theme-toggle {
-  background: none;
+  background: var(--surface-color);
   border: 1px solid var(--border-color);
   cursor: pointer;
-  border-radius: 50%;
-  color: var(--text-primary);
-  transition: all 0.2s;
-  margin-left: 15px;
-  outline: none;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin-left: 1.5rem;
+  overflow: hidden;
+  position: relative;
 }
 
 .theme-toggle:hover {
-  background-color: var(--surface-color);
-  transform: scale(1.1);
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.theme-icon {
-  stroke: currentColor;
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-// Mermaid diagram styling fix
+[data-theme="dark"] .theme-toggle svg {
+  transform: rotate(360deg);
+}
+
+// Posts & Content
+.post-list-heading {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.post-link {
+  display: block;
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.post-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.post-content p {
+  margin-bottom: 1.8rem;
+}
+
+// Mermaid & Visuals
 .mermaid {
   background: #ffffff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin: 2.5rem 0;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  margin: 3rem 0;
   border: 1px solid var(--border-color);
+  transition: transform 0.3s ease;
+}
+
+.mermaid:hover {
+  transform: translateY(-4px);
 }
 
 [data-theme="dark"] .mermaid {
-  filter: invert(0.9) hue-rotate(180deg);
+  filter: invert(0.9) hue-rotate(180deg) brightness(1.1);
 }
 
-pre,
-code {
+// Code & Syntax
+pre, code {
   background-color: var(--code-bg);
   color: var(--text-primary);
+  border-radius: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+pre {
+  padding: 1.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
 }
 
 /* Import Google Fonts */
