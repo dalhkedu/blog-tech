@@ -1,6 +1,4 @@
-﻿---
----
-@import "minima";
+﻿--- --- @import "minima";
 
 // Modern Design Tokens
 :root {
@@ -31,9 +29,15 @@ body {
   font-family: var(--body-font);
   transition: background-color 0.3s, color 0.3s;
   line-height: 1.7;
+  margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--header-font);
   color: var(--text-primary);
 }
@@ -55,7 +59,8 @@ a:hover {
   border-top: 4px solid var(--accent-color);
 }
 
-.site-title, .site-nav .page-link {
+.site-title,
+.site-nav .page-link {
   color: var(--text-primary) !important;
 }
 
@@ -71,35 +76,15 @@ a:hover {
   max-width: 850px;
 }
 
-// Lightbox for Mermaid
-.mermaid {
-  background: #ffffff; // Keep white for better chart readability or adjust
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  margin: 2.5rem 0;
-  border: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .mermaid {
-  background: #fdfdfd; // Mermaid diagrams often look better on light, but we can experiment
-  filter: invert(0.9) hue-rotate(180deg); // Simple trick for dark mode diagrams
-}
-
-// Dark Mode Toggle Button Styles
 .theme-toggle {
   background: none;
   border: 1px solid var(--border-color);
-  padding: 8px;
   cursor: pointer;
-  border-right: 20px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: var(--text-primary);
   transition: all 0.2s;
   margin-left: 15px;
+  outline: none;
 }
 
 .theme-toggle:hover {
@@ -107,14 +92,29 @@ a:hover {
   transform: scale(1.1);
 }
 
-.theme-toggle svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
+.theme-icon {
+  stroke: currentColor;
 }
 
-// Ensure code blocks look good in dark mode
-pre, code {
+// Mermaid diagram styling fix
+.mermaid {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 2.5rem 0;
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .mermaid {
+  filter: invert(0.9) hue-rotate(180deg);
+}
+
+pre,
+code {
   background-color: var(--code-bg);
   color: var(--text-primary);
 }
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap');
