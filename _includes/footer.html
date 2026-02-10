@@ -1,0 +1,16 @@
+﻿<footer class="site-footer">
+  <div class="wrapper" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+    <span>&copy; {{ site.time | date: '%Y' }} {{ site.author | escape }}</span>
+    <nav style="display:flex;gap:1rem">
+      {%- for link in site.minima.social_links -%}
+      <a href="{{ link.user_url }}" target="_blank" rel="noopener" style="color:var(--text-muted)">{{ link.platform }}</a>
+      {%- endfor -%}
+    </nav>
+  </div>
+</footer>
+
+<!-- Mermaid -->
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
