@@ -1,27 +1,33 @@
 ﻿<header class="site-header" role="banner">
   <div class="wrapper" style="display: flex; justify-content: space-between; align-items: center;">
-    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | default: site.name | escape }}</a>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <!-- Dog Icon/Logo -->
+      <a href="{{ '/' | relative_url }}" aria-label="Home" style="display: flex; align-items: center;">
+        <img src="{{ '/assets/dog-icon.svg' | relative_url }}" alt="Logo" style="width: 32px; height: 32px;">
+      </a>
+      <a class="site-title" rel="author" href="{{ '/' | relative_url }}">{{ site.title | default: site.name | escape
+        }}</a>
+    </div>
 
     <nav class="site-nav" style="display: flex; align-items: center;">
-      <!-- Mobile menu trigger removed for cleaner desktop-first aesthetic, can be added back if needed -->
       <div class="trigger" style="display: flex; align-items: center;">
         {%- assign default_paths = site.pages | map: "path" -%}
         {%- assign page_paths = site.header_pages | default: default_paths -%}
         {%- for path in page_paths -%}
-          {%- assign my_page = site.pages | where: "path", path | first -%}
-          {%- if my_page.title -%}
-          <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
-          {%- endif -%}
+        {%- assign my_page = site.pages | where: "path", path | first -%}
+        {%- if my_page.title -%}
+        <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+        {%- endif -%}
         {%- endfor -%}
 
+        <!-- Visual Contrast Separator -->
+        <div style="width: 1px; height: 20px; background: var(--border-color); margin: 0 1rem;"></div>
+
         <!-- Theme Toggle Button -->
-        <button id="theme-toggle" class="theme-toggle" aria-label="Alternar Tema" type="button">
-          <!-- Moon Icon (initial light mode) -->
-          <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <!-- Sun Icon (initial dark mode) -->
-          <svg id="sun-icon" style="display: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme" type="button">
+          <!-- Sun Icon (visible in dark mode) -->
+          <svg id="sun-icon" style="display: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -32,38 +38,57 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
+          <!-- Moon Icon (visible in light mode) -->
+          <svg id="moon-icon" style="display: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
         </button>
       </div>
     </nav>
   </div>
 
   <script>
-    (function() {
-      // Immediate execution to avoid icon flicker if possible
-      const themeToggle = document.querySelector('#theme-toggle');
-      const sunIcon = document.querySelector('#sun-icon');
-      const moonIcon = document.querySelector('#moon-icon');
+    // Robust Theme Toggle Script
+    (function () {
+      function applyThemeIcons() {
+        const theme = document.documentElement.getAttribute('data-theme');
+        const sun = document.getElementById('sun-icon');
+        const moon = document.getElementById('moon-icon');
+        if (!sun || !moon) return;
 
-      function reflectTheme() {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        if (sunIcon && moonIcon) {
-          sunIcon.style.display = isDark ? 'block' : 'none';
-          moonIcon.style.display = isDark ? 'none' : 'block';
+        if (theme === 'dark') {
+          sun.style.display = 'block';
+          moon.style.display = 'none';
+        } else {
+          sun.style.display = 'none';
+          moon.style.display = 'block';
         }
       }
 
-      // Initial check
-      reflectTheme();
+      function initToggle() {
+        const btn = document.getElementById('theme-toggle');
+        if (!btn) return;
 
-      if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-          const currentTheme = document.documentElement.getAttribute('data-theme');
-          const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
-          
-          document.documentElement.setAttribute('data-theme', nextTheme);
-          localStorage.setItem('theme', nextTheme);
-          reflectTheme();
+        btn.addEventListener('click', () => {
+          const current = document.documentElement.getAttribute('data-theme');
+          const next = current === 'dark' ? 'light' : 'dark';
+
+          document.documentElement.setAttribute('data-theme', next);
+          document.documentElement.classList.toggle('dark', next === 'dark');
+          localStorage.setItem('theme', next);
+          applyThemeIcons();
         });
+
+        // Sync icons on load
+        applyThemeIcons();
+      }
+
+      // Run on DOM content loaded and immediately
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initToggle);
+      } else {
+        initToggle();
       }
     })();
   </script>
