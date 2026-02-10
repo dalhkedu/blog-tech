@@ -2,27 +2,119 @@
 ---
 @import "minima";
 
+// Modern Design Tokens
 :root {
-  --background-color: #f8f9fa;
-  --text-color: #2c3e50;
-  --link-color: #e67e22;
+  --bg-color: #ffffff;
+  --surface-color: #f8f9fa;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --accent-color: #e67e22; // Caramelo
+  --border-color: #eeeeee;
   --header-font: 'Outfit', sans-serif;
   --body-font: 'Inter', sans-serif;
+  --code-bg: #f4f4f4;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --surface-color: #1e1e1e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #aaaaaa;
+  --accent-color: #ffb86c; // Dracula Orange/Caramelo-ish
+  --border-color: #333333;
+  --code-bg: #2d2d2d;
 }
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
   font-family: var(--body-font);
+  transition: background-color 0.3s, color 0.3s;
+  line-height: 1.7;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--header-font);
+  color: var(--text-primary);
 }
 
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.site-header {
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+  border-top: 4px solid var(--accent-color);
+}
+
+.site-title, .site-nav .page-link {
+  color: var(--text-primary) !important;
+}
+
+.post-title {
+  color: var(--text-primary);
+}
+
+.post-meta {
+  color: var(--text-secondary);
+}
+
+.wrapper {
+  max-width: 850px;
+}
+
+// Lightbox for Mermaid
 .mermaid {
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 2rem 0;
+  background: #ffffff; // Keep white for better chart readability or adjust
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin: 2.5rem 0;
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .mermaid {
+  background: #fdfdfd; // Mermaid diagrams often look better on light, but we can experiment
+  filter: invert(0.9) hue-rotate(180deg); // Simple trick for dark mode diagrams
+}
+
+// Dark Mode Toggle Button Styles
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  padding: 8px;
+  cursor: pointer;
+  border-right: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition: all 0.2s;
+  margin-left: 15px;
+}
+
+.theme-toggle:hover {
+  background-color: var(--surface-color);
+  transform: scale(1.1);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+// Ensure code blocks look good in dark mode
+pre, code {
+  background-color: var(--code-bg);
+  color: var(--text-primary);
 }
