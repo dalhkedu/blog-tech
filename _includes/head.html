@@ -1,21 +1,23 @@
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/svg+xml" href="{{ '/assets/dog-icon.svg' | relative_url }}">
-{%- seo -%}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/custom.css' | relative_url }}">
-<script>
-(function(){
-  var t = localStorage.getItem('theme');
-  if (t === 'light') {
-    document.documentElement.setAttribute('data-theme','light');
-  }
-})();
-</script>
-{%- feed_meta -%}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/logo-dog.svg' | relative_url }}">
+  {%- seo -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/custom.css' | relative_url }}">
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  {%- feed_meta -%}
 </head>
