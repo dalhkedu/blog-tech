@@ -1,6 +1,6 @@
-<header class="site-header">
+<header class="site-header" role="banner">
   <div class="wrapper" style="display:flex;justify-content:space-between;align-items:center">
-    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
+    <a class="site-title" rel="author" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
     <nav style="display:flex;align-items:center">
       {%- assign default_paths = site.pages | map: "path" -%}
       {%- assign page_paths = site.header_pages | default: default_paths -%}
@@ -19,21 +19,20 @@
 </header>
 <script>
 function toggleTheme() {
-  var current = document.documentElement.getAttribute('data-theme');
-  var next = (current === 'light') ? null : 'light';
-  if (next) {
-    document.documentElement.setAttribute('data-theme', 'light');
-    localStorage.setItem('theme', 'light');
-  } else {
+  var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  if (isLight) {
     document.documentElement.removeAttribute('data-theme');
     localStorage.removeItem('theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light');
   }
-  updateToggleIcons();
+  updateIcons();
 }
-function updateToggleIcons() {
+function updateIcons() {
   var isLight = document.documentElement.getAttribute('data-theme') === 'light';
   document.getElementById('icon-sun').style.display = isLight ? 'none' : 'block';
   document.getElementById('icon-moon').style.display = isLight ? 'block' : 'none';
 }
-updateToggleIcons();
+updateIcons();
 </script>
