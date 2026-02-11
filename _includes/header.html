@@ -1,6 +1,9 @@
 <header class="site-header" role="banner">
   <div class="wrapper" style="display:flex;justify-content:space-between;align-items:center">
-    <a class="site-title" rel="author" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
+    <a class="site-title" rel="author" href="{{ '/' | relative_url }}">
+      <img src="{{ '/assets/logo-dog.svg' | relative_url }}" alt="Logo {{ site.title }}" class="site-logo">
+      {{ site.title | escape }}
+    </a>
     <nav style="display:flex;align-items:center">
       {%- assign default_paths = site.pages | map: "path" -%}
       {%- assign page_paths = site.header_pages | default: default_paths -%}

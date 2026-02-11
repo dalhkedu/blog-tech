@@ -71,6 +71,15 @@ a:hover { color: var(--accent-hover) !important; text-decoration: none !importan
   font-family: var(--font-heading) !important;
   font-weight: 700 !important;
   font-size: 1.15rem !important;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.site-logo {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 .site-nav .page-link {
